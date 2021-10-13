@@ -62,7 +62,8 @@ function saveTrack(){
 
 function loadTrack(filename){
     // console.log("loaded");
-    mainWalls = JSON.parse(filename);
+    let fileName = prompt("Enter track name: ", "");
+    mainWalls = JSON.parse(fileName);
 }
 
 function test(){
