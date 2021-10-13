@@ -55,14 +55,14 @@ function saveTrack(){
     if (nameFile == "" || nameFile == null) {
         alert("Error #1");
     } else {
-        console.log("saved: " + nameFile + ", " + jsonFile);
-        // saveJSON(jsonFile, nameFile);
+        // console.log("saved: " + nameFile + ", " + jsonFile);
+        saveJSON(jsonFile, nameFile);
     }
 }
 
 function loadTrack(filename){
-    console.log("loaded");
-    // mainWalls = JSON.parse(filename);
+    // console.log("loaded");
+    mainWalls = JSON.parse(filename);
 }
 
 function test(){
