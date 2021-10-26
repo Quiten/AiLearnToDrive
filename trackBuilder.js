@@ -17,7 +17,7 @@ function trackBuilding(){
 }
 
 function wallPush () {
-    if (keyIsDown(37)) {
+    if (keyIsDown(81)) {
         for (let i = 0; i < (walls.length); i++){
             mainWalls.push(walls[i]);
         }
@@ -26,7 +26,7 @@ function wallPush () {
 }
 
 function makeCheckpoint(){
-    if (keyIsDown(39)){
+    if (keyIsDown(87)){
         for (let i = 0; i < walls.length; i++){
             checkpoints.push(walls[i]);
         }
@@ -35,14 +35,14 @@ function makeCheckpoint(){
 }
 
 function placeCar () {
-    if (keyIsDown(38)){
+    if (keyIsDown(82)){
         total += 1; 
         cars.push(new car());
     }
 }
 
 function start(){
-    if (keyIsDown(40)){
+    if (keyIsDown(69)){
         for (let i = 0; i < cars.length; i++){
             cars[i].carForward = true;
         }
@@ -50,7 +50,7 @@ function start(){
 }
 
 function saveTrack(){
-    let jsonFile = JSON.stringify( trackConverter() );
+    let jsonFile = JSON.stringify( trackConverter(0, mainWalls) );
     let nameFile = prompt("Enter track name:", "");
     if (nameFile == "" || nameFile == null) {
         alert("Error #1");
@@ -60,21 +60,47 @@ function saveTrack(){
     }
 }
 
-function loadTrack(filename){
-    // console.log("loaded");
-    let fileName = prompt("Enter track name: ", "");
-    mainWalls = JSON.parse(fileName);
+function loadTrack(){
+    console.log("loading");
+    const jsonFile = readTrackFile();
+    const ConvMainWalls = JSON.parse(jsonFile);
+    const wallParse= JSON.parse(ConvMainWalls);
+    mainWalls = trackConverter(1, wallParse);
+
 }
 
-function test(){
-    console.log("test");
+function readTrackFile(){
+    document.getElementById('inputfile').addEventListener('change', function() {
+        var fr=new FileReader();
+        fr.onload=function(){
+            document.getElementById('output').textContent=fr.result;
+        }
+        fr.readAsText(this.files[0]);
+    })
+    return document.getElementById('output').textContent;
 }
 
-function trackConverter(){
+function generationViewer(generation){
+    document.getElementById('generationViewer').textContent = generation;
+}
+
+function trackConverter(option, ConvMainWalls){
     let convertedTrack = [];
-    for (let i = 0; i < mainWalls.length; i++){
-        let convWall = new wallJSON(mainWalls[i].a.x, mainWalls[i].a.y, mainWalls[i].b.x, mainWalls[i].b.y);
-        convertedTrack.push(convWall);
+    let convWall;
+    if (option = 0){
+        for (let i = 0; i < mainWalls.length; i++){
+            convWall = new wallJSON(mainWalls[i].a.x, mainWalls[i].a.y, mainWalls[i].b.x, mainWalls[i].b.y);
+            convertedTrack.push(convWall);
+        }
+    } else if (option = 1){
+        for (let i = 0; i < ConvMainWalls.length; i++){
+            convWall = new wall(ConvMainWalls[i].x1, ConvMainWalls[i].y1, ConvMainWalls[i].x2, ConvMainWalls[i].y2)
+            convertedTrack.push(convWall);
+        }
+    }
+    else {
+        console.log("error #111")
+        return;
     }
     return convertedTrack;
 }

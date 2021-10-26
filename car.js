@@ -55,8 +55,10 @@ class car {
             }
             if (closest) {
                 this.inputs[i] = dist(this.pos.x, this.pos.y, closest.x, closest.y);
-                // line(this.pos.x, this.pos.y, closest.x, closest.y);
-                // ellipse(closest.x, closest.y, 8, 8);
+                if (vision == true) {
+                    line(this.pos.x, this.pos.y, closest.x, closest.y);
+                    ellipse(closest.x, closest.y, 8, 8);
+                }
             }
             else {
                 this.inputs[i] = 0;

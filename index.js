@@ -16,6 +16,7 @@ let trackBuild = [];
 let slider;
 let saveButton;
 let loadButton;
+var vision = false; 
 
 function setup() {
     let canvas = createCanvas(800, 600);
@@ -62,6 +63,9 @@ function draw() {
     drawing();
     placeCar();
     start();
+
+    readTrackFile();
+    generationViewer(generation);
 
     trackPrep(point);
     makeCheckpoint();
