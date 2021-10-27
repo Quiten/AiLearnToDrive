@@ -44,12 +44,14 @@ class car {
             let closest = null; 
             let record = Infinity;
             for (let i = 0; i < walls.length; i++){
-                const pt = ray.cast(walls[i]);
-                if (pt){
-                    const distance = p5.Vector.dist(this.pos, pt);
-                    if (distance < record){
-                        record = distance; 
-                        closest = pt;
+                    if (walls[i].type == 0){
+                    const pt = ray.cast(walls[i]);
+                    if (pt){
+                        const distance = p5.Vector.dist(this.pos, pt);
+                        if (distance < record){
+                            record = distance; 
+                            closest = pt;
+                        }
                     }
                 }
             }

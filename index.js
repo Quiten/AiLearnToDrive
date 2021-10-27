@@ -43,20 +43,11 @@ function setup() {
     // mainWalls.push(new wall(100, 100, 100, 350));
     // mainWalls.push(new wall(700, 100, 700, 350));
 
-    mainWalls.push(new wall(0, height, 0, 0));
-    mainWalls.push(new wall(width, height, width, 0));
-    mainWalls.push(new wall(0, 0, width, 0));
-    mainWalls.push(new wall(0, height, width, height));
+    mainWalls.push(new wall(0, height, 0, 0, 0));
+    mainWalls.push(new wall(width, height, width, 0, 0));
+    mainWalls.push(new wall(0, 0, width, 0, 0));
+    mainWalls.push(new wall(0, height, width, height, 0));
 }
-
-// function keyReleased(){
-//     if (a) {
-//         saveTrack();
-//     } else if (b){
-//         filename = 'track.json';
-//         loadTrack(filename);
-//     }
-// }
 
 function draw() {
     background(220);
@@ -66,6 +57,7 @@ function draw() {
 
     readTrackFile();
     generationViewer(generation);
+    carAmountViewer(cars.length);
 
     trackPrep(point);
     makeCheckpoint();
@@ -78,12 +70,16 @@ function draw() {
         wall.showWall();
     }
     for (let wall of mainWalls){
-        wall.showWall();
+        if (wall.type == 0) {
+            wall.showWall();
+        } else if (wall.type == 1){
+            wall.showCheckpoint();
+        }
     }
 
-    for (let wall of checkpoints){
-        wall.showCheckpoint();
-    }
+    // for (let wall of checkpoints){
+    //     wall.showCheckpoint();
+    // }
 
     for (let r = 0; r < slider.value(); r++){
 
@@ -98,16 +94,23 @@ function draw() {
                 if (cars.length > 0){
                     if (i < mainWalls.length){
                         if (car.collision(mainWalls[i]) == true){
-                            savedCars.push(car);
-                            cars.splice(j, 1);
-                        }
-                    } else if (i >= mainWalls.length && i < checkpoints.length){
-                        if (cars.length > 0){
-                            if (car.collision(checkpoints[i]) == true){
+                            if (mainWalls[i].type == 0){
+                                savedCars.push(car);
+                                cars.splice(j, 1);
+                            } else if (mainWalls[i].type == 1){
                                 car.fitnessPoint();
+                            } else {
+                                console.log("?!");
                             }
                         }
-                    }
+                    } 
+                    // else if (i >= mainWalls.length && i < checkpoints.length){
+                    //     if (cars.length > 0){
+                    //         if (car.collision(checkpoints[i]) == true){
+                    //             car.fitnessPoint();
+                    //         }
+                    //     }
+                    // }
                 }
             }
         }

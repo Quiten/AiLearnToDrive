@@ -1,7 +1,8 @@
 class wall{
-    constructor(xpos1, ypos1, xpos2, ypos2){
+    constructor(xpos1, ypos1, xpos2, ypos2, type){
         this.a = createVector(xpos1, ypos1);
         this.b = createVector(xpos2, ypos2);
+        this.type = type;
     }
 
     showWall(){
