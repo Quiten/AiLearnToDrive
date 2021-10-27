@@ -1,7 +1,7 @@
 function nextGeneration () {
     calculateFitness();
 
-    cars[0] = new car (pastBest());
+    cars[0] = new car (pastBest(), savedCars[bestCarFitness()].startPos.x, savedCars[bestCarFitness()].startPos.y);
     for (let i = 1; i < total; i++){
         cars[i] = newGen();
     }
@@ -20,7 +20,7 @@ function newGen(){
 
     // let chosen = savedCars[index];
     let chosen = savedCars[bestCarFitness()];
-    let newCar = new car(chosen.brain);
+    let newCar = new car(chosen.brain, chosen.startPos.x, chosen.startPos.y);
     newCar.mutate(.1);
     return newCar;
 }

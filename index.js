@@ -26,11 +26,13 @@ function setup() {
 
     saveButton = select('#save');
     loadButton = select('#load');
+    raysButton = select('#rays');
     saveButton.mousePressed( saveTrack );
     loadButton.mousePressed( loadTrack );
+    raysButton.mousePressed( showRays );
 
     for (let i = 0; i < carsAmount; i++){
-        cars.push(new car ());
+        cars.push(new car (0, 150, 100));
     }
     for (let i = 0; i < carsAmount; i++){
         cars[i].carForward = false;
@@ -51,16 +53,14 @@ function setup() {
 
 function draw() {
     background(220);
+
     drawing();
-    placeCar();
-    start();
+    keyBoardFunctions();
 
     readTrackFile();
     generationViewer(generation);
     carAmountViewer(cars.length);
 
-    trackPrep(point);
-    makeCheckpoint();
     for (let point of points){
         trackBuilding();
     }

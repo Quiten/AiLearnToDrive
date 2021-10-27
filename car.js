@@ -1,6 +1,7 @@
 class car {
-    constructor (brain){
-        this.pos = createVector(150, 100);
+    constructor (brain, startX, startY){
+        this.startPos = createVector(startX, startY);
+        this.pos = createVector(this.startPos.x, this.startPos.y);
         this.width = 20; 
         this.height = 7;
         this.speed = 2;

@@ -1,8 +1,10 @@
-function trackPrep() {
-    if (keyIsDown(32)) {
-        point = new screenPoint(mouseX, mouseY);
-        trackBuild.push(createVector(point.pos.x, point.pos.y));
-    }
+function keyBoardFunctions(){
+    trackPrep();
+    wallPush();
+    makeCheckpoint();
+    placeCar();
+    start();
+    changeStartPosition();
 }
 
 function trackBuilding(){
@@ -16,7 +18,16 @@ function trackBuilding(){
     }
 }
 
+function trackPrep(point) {
+    // spacebar
+    if (keyIsDown(32)) {
+        point = new screenPoint(mouseX, mouseY);
+        trackBuild.push(createVector(point.pos.x, point.pos.y));
+    }
+}
+
 function wallPush () {
+    // q
     if (keyIsDown(81)) {
         for (let i = 0; i < (walls.length); i++){
             walls[i].type = 0;
@@ -27,6 +38,7 @@ function wallPush () {
 }
 
 function makeCheckpoint(){
+    // w
     if (keyIsDown(87)){
         for (let i = 0; i < walls.length; i++){
             walls[i].type = 1;
@@ -37,6 +49,7 @@ function makeCheckpoint(){
 }
 
 function placeCar () {
+    // r 
     if (keyIsDown(82)){
         total += 1; 
         cars.push(new car());
@@ -44,10 +57,33 @@ function placeCar () {
 }
 
 function start(){
+    // e 
     if (keyIsDown(69)){
         for (let i = 0; i < cars.length; i++){
             cars[i].carForward = true;
         }
+    }
+}
+
+function changeStartPosition(){
+    // a 
+    if (keyIsDown(65)){
+        for (let i = 0; i < cars.length; i++){
+            cars[i].pos.x = mouseX;
+            cars[i].pos.y = mouseY;
+            cars[i].startPos.x = mouseX;
+            cars[i].startPos.y = mouseY;
+        }
+    }
+}
+
+function showRays () {
+    if (vision == false){
+        vision = true;
+        document.getElementById('rays').textContent = "Hide Rays";
+    } else {
+        vision = false;
+        document.getElementById('rays').textContent = "Show Rays";
     }
 }
 
@@ -110,4 +146,3 @@ function trackConverterArray(ConvMainWalls){
     }
     return convertedTrack;
 }
-
