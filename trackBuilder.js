@@ -3,6 +3,8 @@ function keyBoardFunctions(){
     wallPush();
     makeCheckpoint();
     placeCar();
+    undoButton();
+    deleteWalls();
     start();
     changeStartPosition();
 }
@@ -52,7 +54,7 @@ function placeCar () {
     // r 
     if (keyIsDown(82)){
         total += 1; 
-        cars.push(new car());
+        cars.push(new car(0, mouseX, mouseY));
     }
 }
 
@@ -73,6 +75,23 @@ function changeStartPosition(){
             cars[i].pos.y = mouseY;
             cars[i].startPos.x = mouseX;
             cars[i].startPos.y = mouseY;
+        }
+    }
+}
+
+function deleteWalls(){
+    // s
+    if (keyIsDown(83)){
+        ellipse(mouseX, mouseY, 10);
+    }
+}
+
+function undoButton(){
+    // z 
+    if (keyIsDown(90)){
+        if (walls.length > 0){
+            console.log(walls.length);
+            walls.splice(walls.length, 1);
         }
     }
 }

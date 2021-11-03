@@ -1,7 +1,7 @@
 function nextGeneration () {
     calculateFitness();
-
     cars[0] = new car (pastBest(), savedCars[bestCarFitness()].startPos.x, savedCars[bestCarFitness()].startPos.y);
+    cars[0].color = color(255, 100, 0);
     for (let i = 1; i < total; i++){
         cars[i] = newGen();
     }

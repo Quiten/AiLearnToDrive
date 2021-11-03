@@ -9,10 +9,13 @@ class car {
         this.heading = 0;
         this.longest = ((this.width / 2) ** 2) + ((this.height / 2) ** 2);
         this.rays = [];
+        this.color = 51;
+        this.turningRate = .1;
 
         this.fitness = 0;
         this.fitnessmode = 0;
         this.timer = 1;
+        this.countdown = 120;
         this.inputs = [];
         this.carForward = true; 
         this.alive = true;
@@ -76,6 +79,13 @@ class car {
         this.carTurning = output[0];
     }
 
+    carDie(i){
+        if (countdown === 0){
+            cars.splice(i, 1);
+        }
+        this.countdown -= 1;
+    }
+
     fitnessPoint(){
         if (this.fitnessmode == 20){
             this.fitnessmode = 0;
@@ -90,7 +100,7 @@ class car {
         translate(this.pos.x, this.pos.y);
         rotate(this.angle);
         rectMode(CENTER);
-        fill(51);
+        fill(this.color);
         rect(0, 0, this.width, this.height);
         pop();
 
@@ -100,14 +110,10 @@ class car {
         if (this.carForward == true){
             this.pos.x += cos(this.angle)* this.speed;
             this.pos.y += sin(this.angle)* this.speed;
-            // else if (keyIsDown(DOWN_ARROW)){
-            //     this.pos.x -= cos(this.angle)* this.speed;
-            //     this.pos.y -= sin(this.angle)* this.speed;
-            // }
             if (this.carTurning >= .66){
-                this.angle += .04;
+                this.angle += this.turningRate;
             } else if (this.carTurning <= .33){
-                this.angle -= .04;
+                this.angle -= this.turningRate;
             }
         }
     }

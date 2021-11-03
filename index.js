@@ -18,6 +18,7 @@ let saveButton;
 let loadButton;
 var vision = false; 
 
+
 function setup() {
     let canvas = createCanvas(800, 600);
     canvas.parent('#main');
@@ -77,10 +78,6 @@ function draw() {
         }
     }
 
-    // for (let wall of checkpoints){
-    //     wall.showCheckpoint();
-    // }
-
     for (let r = 0; r < slider.value(); r++){
 
         for (let j = 0;  j <  cars.length; j++){
@@ -90,27 +87,16 @@ function draw() {
             car.rotate();
             car.movement();  
 
+            //mainwalls, cars, savedCars
             for (let i = 0; i < mainWalls.length + checkpoints.length; i++){
-                if (cars.length > 0){
-                    if (i < mainWalls.length){
-                        if (car.collision(mainWalls[i]) == true){
-                            if (mainWalls[i].type == 0){
-                                savedCars.push(car);
-                                cars.splice(j, 1);
-                            } else if (mainWalls[i].type == 1){
-                                car.fitnessPoint();
-                            } else {
-                                console.log("?!");
-                            }
-                        }
+                if (cars.length > 0 && i < mainWalls.length && car.collision(mainWalls[i]) == true){
+                    //collision with ...
+                    if (mainWalls[i].type == 0){
+                        savedCars.push(car);
+                        cars.splice(j, 1);
+                    } else if (mainWalls[i].type == 1){
+                        car.fitnessPoint();
                     } 
-                    // else if (i >= mainWalls.length && i < checkpoints.length){
-                    //     if (cars.length > 0){
-                    //         if (car.collision(checkpoints[i]) == true){
-                    //             car.fitnessPoint();
-                    //         }
-                    //     }
-                    // }
                 }
             }
         }
@@ -118,8 +104,8 @@ function draw() {
             nextGeneration();
         }
     }
-    for (let car of cars){
-        car.showCar();
+    for (let i = 0; i < cars.length; i++){
+        cars[i].showCar();
     }
 }
 
