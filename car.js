@@ -12,9 +12,8 @@ class car {
         this.color = 51;
         this.turningRate = .1;
 
+        this.passedCheckpoints = [];
         this.fitness = 0;
-        this.fitnessmode = 0;
-        this.timer = 1;
         this.countdown = 120;
         this.inputs = [];
         this.carForward = true; 
@@ -80,19 +79,29 @@ class car {
     }
 
     carDie(i){
-        if (countdown === 0){
+        if (this.countdown === 0){
             cars.splice(i, 1);
         }
-        this.countdown -= 1;
+        if (this.carForward == true){
+            this.countdown -= 1;
+        }
     }
 
-    fitnessPoint(){
-        if (this.fitnessmode == 20){
-            this.fitnessmode = 0;
+    fitnessPoint(checkpoint){
+        if (checkpoint == this.passedCheckpoints[0] && this.passedCheckpoints > 0){
+            this.countdown = 120;
             this.fitness += 1;
+            this.passedCheckpoints = [];
+            this.passedCheckpoints.push(checkpoint);
         }
-        this.timer++;
-        this.fitnessmode++;
+        for (let i = 0; i < this.passedCheckpoints.length; i++){
+            if (checkpoint == this.passedCheckpoints[i]){
+                return;
+            }
+        }
+        this.countdown = 120;
+        this.fitness += 1;
+        this.passedCheckpoints.push(checkpoint);
     }
 
     showCar(){

@@ -82,6 +82,7 @@ function draw() {
 
         for (let j = 0;  j <  cars.length; j++){
             let car = cars[j];
+            car.carDie(j);
             car.look(mainWalls); 
             car.think();
             car.rotate();
@@ -95,7 +96,7 @@ function draw() {
                         savedCars.push(car);
                         cars.splice(j, 1);
                     } else if (mainWalls[i].type == 1){
-                        car.fitnessPoint();
+                        car.fitnessPoint(mainWalls[i]);
                     } 
                 }
             }
