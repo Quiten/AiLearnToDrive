@@ -24,10 +24,10 @@ class car {
         if (brain){
             this.brain = brain.copy();
         } else {
-            this.brain = new NeuralNetwork(18, 18, 1); 
+            this.brain = new NeuralNetwork(9, 9, 1); 
         }
 
-        for (let a = 0; a < 360; a += 20){
+        for (let a = -80; a < 100; a += 20){
             this.rays.push(new ray(this.pos, radians(a)));
         }
     }
@@ -35,7 +35,7 @@ class car {
     rotate(){
         if (this.carForward == true){
             for (let i = 0; i < this.rays.length; i += 1) {
-                this.rays[i].setAngle(radians(i * 20) + this.angle);
+                this.rays[i].setAngle((radians(i*20) + 80) + this.angle);
             }
         }
     };
@@ -80,6 +80,7 @@ class car {
 
     carDie(i){
         if (this.countdown === 0){
+            savedCars.push(cars[i]);
             cars.splice(i, 1);
         }
         if (this.carForward == true){
@@ -88,14 +89,11 @@ class car {
     }
 
     fitnessPoint(checkpoint){
-        if (checkpoint == this.passedCheckpoints[0] && this.passedCheckpoints > 0){
-            this.countdown = 120;
-            this.fitness += 1;
+        if (checkpoint === this.passedCheckpoints[0] && this.passedCheckpoints.length > 2){
             this.passedCheckpoints = [];
-            this.passedCheckpoints.push(checkpoint);
         }
         for (let i = 0; i < this.passedCheckpoints.length; i++){
-            if (checkpoint == this.passedCheckpoints[i]){
+            if (checkpoint === this.passedCheckpoints[i]){
                 return;
             }
         }
@@ -111,8 +109,9 @@ class car {
         rectMode(CENTER);
         fill(this.color);
         rect(0, 0, this.width, this.height);
+        fill(0,200,255);
+        rect(this.width - 12 , 0, 5, 7);
         pop();
-
     }
 
     movement() {
@@ -135,6 +134,21 @@ class car {
 
     mutate(value){
         this.brain.mutate(value);
+    }
+
+    typeCollision(car, j){
+        //mainwalls, cars, savedCars
+        for (let i = 0; i < mainWalls.length; i++){
+            if (cars.length > 0 && i < mainWalls.length && car.collision(mainWalls[i]) == true){
+                //collision with ...
+                if (mainWalls[i].type == 0){
+                    savedCars.push(car);
+                    cars.splice(j, 1);
+                } else if (mainWalls[i].type == 1){
+                    car.fitnessPoint(mainWalls[i]);
+                } 
+            }
+        }
     }
 
     collision(wall){

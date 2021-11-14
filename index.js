@@ -2,7 +2,6 @@ const carsAmount = 500;
 let total;
 
 let mainWalls = [];
-let checkpoints = [];
 let walls = [];
 
 let cars = [];
@@ -40,11 +39,6 @@ function setup() {
     }
     generation = 0;
     total = cars.length;
-
-    // mainWalls.push(new wall(100, 100, 700, 100));
-    // mainWalls.push(new wall(100, 350, 700, 350));
-    // mainWalls.push(new wall(100, 100, 100, 350));
-    // mainWalls.push(new wall(700, 100, 700, 350));
 
     mainWalls.push(new wall(0, height, 0, 0, 0));
     mainWalls.push(new wall(width, height, width, 0, 0));
@@ -87,19 +81,8 @@ function draw() {
             car.think();
             car.rotate();
             car.movement();  
-
-            //mainwalls, cars, savedCars
-            for (let i = 0; i < mainWalls.length + checkpoints.length; i++){
-                if (cars.length > 0 && i < mainWalls.length && car.collision(mainWalls[i]) == true){
-                    //collision with ...
-                    if (mainWalls[i].type == 0){
-                        savedCars.push(car);
-                        cars.splice(j, 1);
-                    } else if (mainWalls[i].type == 1){
-                        car.fitnessPoint(mainWalls[i]);
-                    } 
-                }
-            }
+            //
+            car.typeCollision(car, j);
         }
         if (cars.length === 0){
             nextGeneration();
