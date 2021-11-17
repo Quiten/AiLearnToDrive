@@ -10,15 +10,6 @@ function nextGeneration () {
 }
 
 function newGen(){
-    // let index = 0;
-    // let r = random(1);
-    // while (r > 0){
-    //     r = r - savedCars[index].score;
-    //     index++;
-    // }
-    // index--;
-
-    // let chosen = savedCars[index];
     let chosen = savedCars[bestCarFitness()];
     let newCar = new car(chosen.brain, chosen.startPos.x, chosen.startPos.y);
     newCar.mutate(.1);
