@@ -13,7 +13,7 @@ class car {
         this.turningRate = .1;
 
         this.passedCheckpoints = [];
-        this.fitness = 0;
+        this.fitness = 1;
         this.countdown = 120;
         this.inputs = [];
         this.carForward = true; 

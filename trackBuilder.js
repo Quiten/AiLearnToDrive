@@ -96,6 +96,13 @@ function undoButton(){
     }
 }
 
+function killAll(){
+    for (let i = cars.length - 1; i > -1; i--){
+        savedCars.push(cars[i]);
+        cars.splice(i, 1);
+    }
+}
+
 function showRays () {
     if (vision == false){
         vision = true;
@@ -112,7 +119,6 @@ function saveTrack(mainWalls){
     if (nameFile == "" || nameFile == null) {
         alert("Error #1");
     } else {
-        // console.log("saved: " + nameFile + ", " + jsonFile);
         saveJSON(jsonFile, nameFile);
     }
 }

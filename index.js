@@ -17,19 +17,20 @@ let saveButton;
 let loadButton;
 var vision = false; 
 
-
 function setup() {
     let canvas = createCanvas(800, 600);
     canvas.parent('#main');
-
-    slider = createSlider(1, 100, 1);
-
+    killAllButton = select('#killAll');
     saveButton = select('#save');
     loadButton = select('#load');
     raysButton = select('#rays');
+
+    killAllButton.mousePressed( killAll );
     saveButton.mousePressed( saveTrack );
     loadButton.mousePressed( loadTrack );
     raysButton.mousePressed( showRays );
+
+    slider = createSlider(1, 100, 1);
 
     for (let i = 0; i < carsAmount; i++){
         cars.push(new car (0, 150, 100));
