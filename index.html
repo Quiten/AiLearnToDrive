@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8"/>
         <title>Test</title>
-
+        <link rel="stylesheet" href="index.css">
         <script src="nn.js"></script>
         <script src="matrix.js"></script>
         <script src="generation.js"></script>
@@ -13,19 +13,33 @@
         <script src="wallJSON.js"></script>
         <script src="ray.js"></script>
         <script src="car.js"></script>
+        <script src="stopwatch.js"></script>
         <script src="trackBuilder.js"></script>
         <script src="drawing.js"></script>
         <script src="index.js"></script>
     </head>
     <body>
-        <p>
-            <div id="main"></div>
-            <button id="killAll">Kill All</button>
-            <button id="save">Save Track</button>
-            <button id="load">Load Track</button>
-            <button id="rays">Show Rays</button>
-            <input type="file" name="inputfile" id="inputfile">
-        </p>
+        <div class="box">
+            <p><span class="text">Timer:</span> <span class="text" id="stopwatch">00:00:00</span></p>
+            <p><span class="text">Best Time: </span><span class="text" id="bestTime"></span></p>
+            <p class="text">Gewicht 1:</p>
+            <p class="text">Gewicht 2:</p>
+            <p class="text">Gewicht 3:</p>
+            <p class="text">Gewicht 4:</p>
+            <p class="text">Gewicht 5:</p>
+            <p class="text">Gewicht 6:</p>
+            <p class="text">Gewicht 7:</p>
+            <p class="text">Gewicht 8:</p>
+            <p class="text">Gewicht 9:</p>
+
+        </div>
+        <div id="main"></div>
+        <button id="save">Save Track</button>
+        <button id="load">Load Track</button>
+        <br>
+        <button id="rays">Show Rays</button>
+        <input type="file" name="inputfile" id="inputfile">
+        
         <pre id="generationViewer"></pre>
         <pre id="carAmountViewer"></pre>
         <pre id="output"></pre>

@@ -61,10 +61,15 @@ function placeCar () {
 function start(){
     // e 
     if (keyIsDown(69)){
+        startTimer();
         for (let i = 0; i < cars.length; i++){
             cars[i].carForward = true;
         }
     }
+}
+
+function bestTime(){
+
 }
 
 function changeStartPosition(){
@@ -93,13 +98,6 @@ function undoButton(){
             console.log(walls.length);
             walls.splice(walls.length, 1);
         }
-    }
-}
-
-function killAll(){
-    for (let i = cars.length - 1; i > -1; i--){
-        savedCars.push(cars[i]);
-        cars.splice(i, 1);
     }
 }
 

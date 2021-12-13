@@ -15,17 +15,16 @@ let trackBuild = [];
 let slider;
 let saveButton;
 let loadButton;
+let raysButton;
 var vision = false; 
 
 function setup() {
     let canvas = createCanvas(800, 600);
     canvas.parent('#main');
-    killAllButton = select('#killAll');
     saveButton = select('#save');
     loadButton = select('#load');
     raysButton = select('#rays');
 
-    killAllButton.mousePressed( killAll );
     saveButton.mousePressed( saveTrack );
     loadButton.mousePressed( loadTrack );
     raysButton.mousePressed( showRays );
@@ -82,16 +81,16 @@ function draw() {
             car.think();
             car.rotate();
             car.movement();  
-            //
+            
             car.typeCollision(car, j);
         }
         if (cars.length === 0){
+            // stopTimer();
             nextGeneration();
+            resetTimer();
         }
     }
     for (let i = 0; i < cars.length; i++){
         cars[i].showCar();
     }
 }
-
-
