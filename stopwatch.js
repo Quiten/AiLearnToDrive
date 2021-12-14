@@ -54,7 +54,7 @@ function timerCycle() {
 
 function resetTimer() {
     document.getElementById('stopwatch').textContent = '00:00:00';
-    UIupdate();
+    pastBest(hr, minuten, sec);
     sec = 0;
     minuten = 0;
     hr = 0;

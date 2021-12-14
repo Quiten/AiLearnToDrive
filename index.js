@@ -89,7 +89,6 @@ function draw() {
             resetTimer();
         }
     }
-    UIupdate();
     for (let i = 0; i < cars.length; i++){
         cars[i].showCar();
     }

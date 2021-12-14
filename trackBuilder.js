@@ -68,13 +68,6 @@ function start(){
     }
 }
 
-function UIupdate(){
-    var weightName = "gewicht";
-    for (var i = 1; i < 10; i++){
-        document.getElementById(weightName+i).textContent = weightName + " " + i + ": " + cars[0].inputs[i-1];
-    }
-}
-
 function changeStartPosition(){
     // a 
     if (keyIsDown(65)){
@@ -172,3 +165,8 @@ function trackConverterArray(ConvMainWalls){
     }
     return convertedTrack;
 }
+
+function pastBest(hr, minutes, sec){
+    document.getElementById("bestTime").textContent = hr + ":" + minutes + ":" + sec;
+}
+
