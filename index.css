@@ -1,10 +1,10 @@
 .box{
     background-color: rgb(66, 66, 66);
-    height: 300px;
+    height: 350px;
     width: 200px;
     opacity: 50%;
 
-    top:300px;
+    top:250px;
     left:600px;
     position: absolute;
     z-index: 2;

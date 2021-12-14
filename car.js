@@ -169,18 +169,7 @@ class car {
 
             const x6 = this.pos.x + cos(this.angle - atan(this.height/this.width)) * sqrt(this.longest);
             const y6 = this.pos.y + sin(this.angle - atan(this.height/this.width)) * sqrt(this.longest);
-
-            // stroke(255, 0 ,0);
-            // line(x3, y3, x4, y4);
-            // line(x5, y5, x6, y6);
-            // stroke(0);
-
-            // textSize(10);
-            // let text1 = this.fitness;
-            // text(text1, x3 + 5, y3 - 10);
-            // fill(0);
-
-
+            
             const den1 = ((x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4));
             const den2 = ((x1 - x2) * (y5 - y6) - (y1 - y2) * (x5 - x6));
 

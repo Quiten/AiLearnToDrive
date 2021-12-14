@@ -85,11 +85,11 @@ function draw() {
             car.typeCollision(car, j);
         }
         if (cars.length === 0){
-            // stopTimer();
             nextGeneration();
             resetTimer();
         }
     }
+    UIupdate();
     for (let i = 0; i < cars.length; i++){
         cars[i].showCar();
     }
