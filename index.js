@@ -37,7 +37,7 @@ function setup() {
     for (let i = 0; i < carsAmount; i++){
         cars[i].carForward = false;
     }
-    generation = 0;
+    generation = 1;
     total = cars.length;
 
     mainWalls.push(new wall(0, height, 0, 0, 0));

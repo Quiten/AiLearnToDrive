@@ -166,7 +166,7 @@ function trackConverterArray(ConvMainWalls){
     return convertedTrack;
 }
 
-function pastBest(hr, minutes, sec){
+function pastBestTime(hr, minutes, sec){
     document.getElementById("bestTime").textContent = hr + ":" + minutes + ":" + sec;
 }
 

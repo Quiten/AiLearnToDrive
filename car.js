@@ -19,12 +19,11 @@ class car {
         this.carForward = true; 
         this.alive = true;
         this.carTurning;
-        this.score;
         
         if (brain){
             this.brain = brain.copy();
         } else {
-            this.brain = new NeuralNetwork(9, 9, 1); 
+            this.brain = new NeuralNetwork(18, 18, 1); 
         }
 
         for (let a = -80; a < 100; a += 20){
@@ -41,13 +40,14 @@ class car {
     };
 
     look(walls){
-        const scene = [];
         for (let i = 0; i < this.rays.length; i++){
             const ray = this.rays[i];
             let closest = null; 
             let record = Infinity;
+            let closestCheck = null;
+
             for (let i = 0; i < walls.length; i++){
-                    if (walls[i].type == 0){
+                if (walls[i].type == 0){
                     const pt = ray.cast(walls[i]);
                     if (pt){
                         const distance = p5.Vector.dist(this.pos, pt);
@@ -57,20 +57,39 @@ class car {
                         }
                     }
                 }
-            }
-            if (closest) {
-                this.inputs[i] = dist(this.pos.x, this.pos.y, closest.x, closest.y);
-                if (vision == true) {
-                    line(this.pos.x, this.pos.y, closest.x, closest.y);
-                    ellipse(closest.x, closest.y, 8, 8);
+                if (walls[i].type == 1){
+                    const pt = ray.cast(walls[i]);
+                    if (pt){
+                        const distance = p5.Vector.dist(this.pos, pt);
+                        if (distance < record){
+                            record = distance;
+                            closestCheck = pt;
+                        }
+                    }
                 }
             }
-            else {
+            if (closest){
+                this.lookInput(closest, i);
+            }   else {
                 this.inputs[i] = 0;
             }
-            scene[i] = record; 
+            if (closestCheck){
+                this.lookInput(closestCheck, i+9);
+            } else {
+                this.inputs[i+9] = 0;
+            }
         }
-        return scene; 
+        return 0; 
+    }
+
+    lookInput(closest, i){
+        if (i<9){
+            this.inputs[i] = dist(this.pos.x, this.pos.y, closest.x, closest.y);
+            if (vision == true) {
+                line(this.pos.x, this.pos.y, closest.x, closest.y);
+                ellipse(closest.x, closest.y, 8, 8);
+            }
+        } else this.inputs[i] = dist(this.pos.x, this.pos.y, closest.x, closest.y);
     }
 
     think(){
@@ -85,6 +104,7 @@ class car {
         }
         if (this.carForward == true){
             this.countdown -= 1;
+            // this.fitness += 0.000001;
         }
     }
 
@@ -126,12 +146,6 @@ class car {
         }
     }
 
-    update(){
-        this.pos.x += cos(this.angle);
-        this.pos.y += sin(this.angle);
-        this.angle += random(-1 ,1);
-    }
-
     mutate(value){
         this.brain.mutate(value);
     }
@@ -140,7 +154,7 @@ class car {
         //mainwalls, cars, savedCars
         for (let i = 0; i < mainWalls.length; i++){
             if (cars.length > 0 && i < mainWalls.length && car.collision(mainWalls[i]) == true){
-                //collision with ...
+                //collision with walls and checkpoints 
                 if (mainWalls[i].type == 0){
                     savedCars.push(car);
                     cars.splice(j, 1);
