@@ -55,6 +55,7 @@ function draw() {
     readTrackFile();
     generationViewer(generation);
     carAmountViewer(cars.length);
+    framerateViewer();
 
     for (let point of points){
         trackBuilding();

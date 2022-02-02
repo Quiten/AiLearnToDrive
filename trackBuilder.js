@@ -145,6 +145,11 @@ function carAmountViewer(amount){
     document.getElementById('carAmountViewer').textContent = "Cars: " + amount;
 }
 
+function framerateViewer(){
+    document.getElementById('framerateViewer').textContent = "FPS: " + round(frameRate())
+}
+
+
 function trackConverter(){
     let convertedTrack = [];
     let convWall;
