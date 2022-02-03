@@ -146,7 +146,7 @@ function carAmountViewer(amount){
 }
 
 function framerateViewer(){
-    document.getElementById('framerateViewer').textContent = "FPS: " + round(frameRate())
+    document.getElementById('framerateViewer').textContent = "Framerate: " + round(frameRate())
 }
 
 
